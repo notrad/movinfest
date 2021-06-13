@@ -1,0 +1,7 @@
+.env
+node_modules
+course_link.txt
+mix-manifest.json
+package-lock.json
+menu.json
+plan.txt
