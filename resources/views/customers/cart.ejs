@@ -1,4 +1,4 @@
-<section class="cart py-16">
+<section class="cart py-5 md:py-16">
 
   <% if(session.cart) {%>
 
@@ -13,14 +13,14 @@
 
       <% for(let pizza of Object.values(session.cart.items)) {%>
 
-      <div class="flex items-center my-4 rounded-xl shadow-md bg-white py-4 px-8">
+      <div class="flex flex-col sm:flex-row items-center my-4 rounded-xl shadow-md bg-white py-4 px-8">
         <img class="w-24" src="/img/<%= pizza.item.image %>" alt="">
-        <div class="flex-1 ml-4">
-          <h1><%= pizza.item.name %></h1>
-          <span><%= pizza.item.size %></span>
+        <div class="flex-1 text-center md:ml-4 md:text-left">
+          <h1 class="font-bold"><%= pizza.item.name %></h1>
+          <span class="uppercase text-xs"><%= pizza.item.size %></span>
         </div>
-        <span class="flex-1"><%= pizza.qty %> Pcs</span>
-        <span class="fond-bold text-lg">₹<%= pizza.item.price * pizza.qty %></span>
+        <span class="flex-1 my-2 md:my-0"><button name="button" class="btn-primary px-4 py-1 rounded-full text-white font-bold">Remove</button></span>
+        <span class="font-bold text-lg">₹<%= pizza.item.price * pizza.qty %></span>
       </div>
 
       <%}%>
@@ -39,8 +39,8 @@
           <% if (messages.error) { %>
             <span class="block text-red-500 text-sm mb-1"><%= messages.error %></span>
           <% }%>
-          <input class="border border-gray-400 p-2 w-1/2 mb-4 rounded" type="text" placeholder="Phone Number" name="phone">
-          <textarea name="address" class="border border-gray-400 p-2 w-1/2 rounded" placeholder="Address"></textarea>
+          <input class="border border-gray-400 p-2 w-full md:w-1/2 mb-4 rounded" type="text" placeholder="Phone Number" name="phone">
+          <textarea name="address" class="border border-gray-400 p-2 w-full md:w-1/2 rounded" placeholder="Address"></textarea>
           <div class="">
             <button type="submit" name="button" class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-6">Order Now</button>
           </div>

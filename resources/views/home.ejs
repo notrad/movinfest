@@ -2,12 +2,12 @@
 
     <div class="container mx-auto flex items-center justify-between">
         <div class="w-1/2">
-            <h6 class="text-lg"><em>Are you hungry?</em></h6>
-            <h1 class="text-3xl md:text-6xl font-bold">Don't wait !</h1>
+          <h1 class="text-3xl md:text-6xl font-bold">Oh yeah, it’s that good.</h1>
+            <h6 class="text-lg"><em>See for yourself.</em></h6>
             <button class="px-6 py-2 rounded-full text-white font-bold mt-4 btn-primary">Order Now</button>
         </div>
         <div class="w-1/2">
-            <img src="/img/hero-pizza.png" alt="">
+            <img src="https://i.pinimg.com/originals/d0/90/02/d09002b6a1bcb269387fe31cecb7c8da.png" alt="">
         </div>
     </div>
 
@@ -15,18 +15,18 @@
 
 <section class="menu container mx-auto py-8">
 
-    <h1 class="text-xl font-bold mb-8">All Pizzas</h1>
+    <h1 class="text-xl font-bold mb-8 text-center" id="choose-title">Our Menu</h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-12 gap-x-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-10 gap-x-10">
 
         <% pizzas.forEach( pizza => { %>
-        <div class="w-full md:w-64">
+        <div class="w-full md:w-64 rounded-xl shadow-md bg-white-100 py-6">
             <img class="h-40 mb-4 mx-auto" src="/img/<%= pizza.image %>" alt="">
             <div class="text-center">
                 <h2 class="mb-4 text-lg"><%= pizza.name %></h2>
                 <span class="size py-1 px-4 rounded-full uppercase text-xs"><%= pizza.size %></span>
                 <div class="flex items-center justify-around mt-6">
-                    <span class="font-bold text-lg">₹<%= pizza.price %></span>
+                    <span class="font-bold text-lg">₹<%= pizza.price %><em class="text-sm">/Plate</em></span>
                     <button data-pizza="<%= JSON.stringify(pizza) %>"
                         class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
                         <span>+</span>

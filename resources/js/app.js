@@ -1,12 +1,3 @@
-// window.onload = (event) => {
-//   console.log('page is fully loaded');
-// };
-// use if images, iframes and others things have listeners
-//
-// window.addEventListener('DOMContentLoaded', (event) => {
-//
-// });
-
 import axios from 'axios';
 import Noty from 'noty';
 import { initAdmin } from './admin';

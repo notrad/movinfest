@@ -1,4 +1,3 @@
-@import url(https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap);
 @charset "UTF-8";
 .noty_layout_mixin, #noty_layout__centerRight, #noty_layout__centerLeft, #noty_layout__center, #noty_layout__bottomRight, #noty_layout__bottomCenter, #noty_layout__bottomLeft, #noty_layout__bottom, #noty_layout__topRight, #noty_layout__topCenter, #noty_layout__topLeft, #noty_layout__top {
   position: fixed;
@@ -291,18 +290,22 @@ body {
   font-family: "Lato", sans-serif;
 }
 
-nav li:last-child a {
-  background: #fe5e1e;
+.navigation-cart-icon {
+  background: #b79c6e;
 }
-nav li:last-child a:hover {
-  background: #b23301;
+.navigation-cart-icon:hover {
+  background: #806d4d;
 }
 
-nav li a {
+.navigation > a, .navigation > form > a {
   transition: all 0.3s ease-in-out;
 }
-nav li a:hover {
-  color: #fe5e1e;
+.navigation > a:hover, .navigation > form > a:hover {
+  color: #b79c6e;
+}
+
+.taste {
+  transition: all 0.3s ease-in-out !important;
 }
 
 section.hero {
@@ -314,12 +317,12 @@ section.hero {
 }
 
 .add-to-cart {
-  border: 2px solid #fe5e1e;
-  color: #fe5e1e;
+  border: 2px solid #b79c6e;
+  color: #b79c6e;
   transition: all 0.3s ease-in-out;
 }
 .add-to-cart:hover {
-  background: #fe5e1e;
+  background: #b79c6e;
   border-color: #ffffff;
   color: #ffffff;
 }
@@ -328,11 +331,11 @@ section.hero {
 }
 
 .btn-primary {
-  background: #fe5e1e;
+  background: #b79c6e;
   transition: all 0.3s ease-in-out;
 }
 .btn-primary:hover {
-  background: #b23301;
+  background: #806d4d;
 }
 
 section.cart {
@@ -340,7 +343,7 @@ section.cart {
   min-height: calc(100vh - 86px);
 }
 section.cart .amount {
-  color: #fe5e1e;
+  color: #b79c6e;
 }
 
 section.login {
@@ -348,10 +351,10 @@ section.login {
   min-height: calc(100vh - 86px);
 }
 section.login a {
-  color: #fe5e1e;
+  color: #b79c6e;
 }
 section.login a:hover {
-  color: #b23301;
+  color: #806d4d;
 }
 
 .noty_theme__mint {
@@ -360,7 +363,7 @@ section.login a:hover {
 }
 
 a.link {
-  color: #fe5e1e;
+  color: #b79c6e;
 }
 
 section.status {
@@ -457,17 +460,35 @@ section.status {
 }
 
 .status-box ul li.current span {
-  color: #fe5e1e;
+  color: #b79c6e;
 }
 
 .status-box ul li.current span:after {
-  background: #fe5e1e;
+  background: #b79c6e;
 }
 
 .status-box ul li small {
   float: right;
   font-size: 14px;
   margin-top: 8px;
+}
+
+#choose-title {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-gap: 1rem;
+  align-items: center;
+}
+
+#choose-title::after, #choose-title::before {
+  content: "";
+  display: block;
+  height: 0.5rem;
+  background: linear-gradient(to left, #b79c6e, transparent);
+}
+
+#choose-title::after {
+  background: linear-gradient(to right, #b79c6e, transparent);
 }
 
 @media (max-width: 1060px) {
