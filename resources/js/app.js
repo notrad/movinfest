@@ -4,11 +4,15 @@ import { initAdmin } from './admin';
 import moment from 'moment';
 
 let addToCart = document.querySelectorAll('.add-to-cart');
+let removeFromCart = document.querySelectorAll('.remove-from-cart');
 let cartCounter = document.querySelector('#cartCounter');
+let cartAmount = document.querySelector('.amount');
 const alertMsg = document.querySelector('#success-alert');
 
-function updateCart(pizza) {
-  axios.post('/update-cart', pizza)
+
+// add to cart, funcionality
+function updateCart(item) {
+  axios.post('/update-cart', item)
   .then(res => {
     cartCounter.innerText = res.data.totalQty;
     new Noty({
@@ -30,13 +34,55 @@ function updateCart(pizza) {
   })
 }
 
-
+// add to cart event handler
 addToCart.forEach((btn) => {
   btn.addEventListener('click', (e)=>{
-    let pizza = JSON.parse(btn.dataset.pizza);
-    updateCart(pizza);
+    let item = JSON.parse(btn.dataset.item);
+    updateCart(item);
   });
 });
+
+
+// remove from cart, funcionality
+function removeCartItem(item, btn) {
+  axios.post('/remove-cart-item', item)
+  .then(res => {
+    if (res.data.refreshPage) {
+      location.reload();
+    } else {
+      cartCounter.innerText = res.data.totalQty;
+      cartAmount.innerText = `₹${res.data.totalPrice}`;
+      new Noty({
+        type: 'success',
+        timeout: 1000,
+        progressBar: false,
+        text: 'Removed From Cart',
+        layout: 'topRight'
+      }).show();
+      btn.parentElement.parentElement.remove();
+    }
+
+
+  })
+  .catch( err => {
+    new Noty({
+      type: 'error',
+      timeout: 1000,
+      progressBar: false,
+      text: 'Whoops! Item Could Not Be Deleted.',
+      layout: 'topRight'
+    }).show();
+  })
+}
+
+// remove from cart event handler
+removeFromCart.forEach((btn) => {
+  btn.addEventListener('click', (e)=>{
+    let item = JSON.parse(btn.dataset.item);
+    removeCartItem(item, btn);
+  });
+});
+
 
 if(alertMsg) {
     setTimeout(() => {

@@ -39,10 +39,6 @@ section.hero {
   background: $secondary;
 }
 
-.size {
-  background: $secondary;
-}
-
 .add-to-cart {
   border: 2px solid $primary;
   color: $primary;
@@ -52,6 +48,12 @@ section.hero {
     border-color: $pure;
     color: $pure;
   }
+  &:focus {
+    outline: none;
+  }
+}
+
+.remove-from-cart{
   &:focus {
     outline: none;
   }
@@ -205,21 +207,21 @@ section.status {
     margin-top: 8px;
 }
 
-#choose-title {
+.choose-title {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   grid-gap: 1rem;
   align-items: center;
 }
 
-#choose-title::after, #choose-title::before{
+.choose-title::after, .choose-title::before{
   content: "";
   display: block;
   height: 0.5rem;
   background: linear-gradient(to left, $primary, transparent);
 }
 
-#choose-title::after {
+.choose-title::after {
   background: linear-gradient(to right, $primary, transparent);
 }
 

@@ -51,7 +51,7 @@
 
       <div class="px-4 py-2 ml-3 mt-2 font-semibold md:mt-0 md:ml-4 rounded-full w-16 md:w-auto navigation-cart-icon">
         <a href="/cart" class="inline-block flex items-center">
-          <span id="cartCounter" class="text-white font-bold pr-1"><%= session.cart ? session.cart.totalQty : '' %></span>
+          <span id="cartCounter" class="text-white font-bold pr-1"><%= session.cart ? session.cart.totalQty : '0' %></span>
           <img src="/img/cart.png" alt="cart-image">
         </a>
       </div>

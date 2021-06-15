@@ -1924,11 +1924,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var addToCart = document.querySelectorAll('.add-to-cart');
+var removeFromCart = document.querySelectorAll('.remove-from-cart');
 var cartCounter = document.querySelector('#cartCounter');
-var alertMsg = document.querySelector('#success-alert');
+var cartAmount = document.querySelector('.amount');
+var alertMsg = document.querySelector('#success-alert'); // add to cart, funcionality
 
-function updateCart(pizza) {
-  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/update-cart', pizza).then(function (res) {
+function updateCart(item) {
+  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/update-cart', item).then(function (res) {
     cartCounter.innerText = res.data.totalQty;
     new (noty__WEBPACK_IMPORTED_MODULE_1___default())({
       type: 'success',
@@ -1946,12 +1948,48 @@ function updateCart(pizza) {
       layout: 'topRight'
     }).show();
   });
-}
+} // add to cart event handler
+
 
 addToCart.forEach(function (btn) {
   btn.addEventListener('click', function (e) {
-    var pizza = JSON.parse(btn.dataset.pizza);
-    updateCart(pizza);
+    var item = JSON.parse(btn.dataset.item);
+    updateCart(item);
+  });
+}); // remove from cart, funcionality
+
+function removeCartItem(item, btn) {
+  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/remove-cart-item', item).then(function (res) {
+    if (res.data.refreshPage) {
+      location.reload();
+    } else {
+      cartCounter.innerText = res.data.totalQty;
+      cartAmount.innerText = "\u20B9".concat(res.data.totalPrice);
+      new (noty__WEBPACK_IMPORTED_MODULE_1___default())({
+        type: 'success',
+        timeout: 1000,
+        progressBar: false,
+        text: 'Removed From Cart',
+        layout: 'topRight'
+      }).show();
+      btn.parentElement.parentElement.remove();
+    }
+  })["catch"](function (err) {
+    new (noty__WEBPACK_IMPORTED_MODULE_1___default())({
+      type: 'error',
+      timeout: 1000,
+      progressBar: false,
+      text: 'Whoops! Item Could Not Be Deleted.',
+      layout: 'topRight'
+    }).show();
+  });
+} // remove from cart event handler
+
+
+removeFromCart.forEach(function (btn) {
+  btn.addEventListener('click', function (e) {
+    var item = JSON.parse(btn.dataset.item);
+    removeCartItem(item, btn);
   });
 });
 

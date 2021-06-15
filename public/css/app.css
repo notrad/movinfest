@@ -312,10 +312,6 @@ section.hero {
   background: #f8f8f8;
 }
 
-.size {
-  background: #f8f8f8;
-}
-
 .add-to-cart {
   border: 2px solid #b79c6e;
   color: #b79c6e;
@@ -327,6 +323,10 @@ section.hero {
   color: #ffffff;
 }
 .add-to-cart:focus {
+  outline: none;
+}
+
+.remove-from-cart:focus {
   outline: none;
 }
 
@@ -473,21 +473,21 @@ section.status {
   margin-top: 8px;
 }
 
-#choose-title {
+.choose-title {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   grid-gap: 1rem;
   align-items: center;
 }
 
-#choose-title::after, #choose-title::before {
+.choose-title::after, .choose-title::before {
   content: "";
   display: block;
   height: 0.5rem;
   background: linear-gradient(to left, #b79c6e, transparent);
 }
 
-#choose-title::after {
+.choose-title::after {
   background: linear-gradient(to right, #b79c6e, transparent);
 }
 
