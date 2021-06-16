@@ -9,6 +9,12 @@ function homeController() {
         items: items
       });
 
+    },
+
+    about(req, res) {
+
+      return res.render('about-us');
+
     }
   };
 }

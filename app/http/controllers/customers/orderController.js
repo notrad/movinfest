@@ -15,9 +15,9 @@ function orderController() {
     },
 
     store(req, res) {
-      const { phone, address } = req.body;
+      const { phone, address, guests, eventtype, datetime, customization } = req.body;
 
-      if (!phone || !address) {
+      if (!phone || !address || !guests || !eventtype || !datetime ) {
         req.flash('error', 'All Fields Are Required');
         return res.redirect('/cart');
       }
@@ -25,8 +25,12 @@ function orderController() {
       const order = new Order({
         customerId: req.user._id,
         items:req.session.cart.items,
-        phone,
-        address
+        phone: phone,
+        address: address,
+        guests: guests,
+        eventtype: eventtype,
+        datetime: datetime,
+        customization: (customization ? customization : "None"),
       });
 
       order.save()
@@ -50,12 +54,20 @@ function orderController() {
     },
 
     async show(req, res) {
-            const order = await Order.findById(req.params.id);
 
+          try {
+            const order = await Order.findById(req.params.id);
             if(req.user._id.toString() === order.customerId.toString()) {
-                return res.render('customers/singleOrder', { order });
-            } else {
-            return  res.redirect('/');
+              let totalPrice = 0;
+              for (var variable of Object.values(order.items)) {
+              for (var item of Object.values(variable)) {
+                totalPrice += item.price;
+              }}
+
+                return res.render('customers/singleOrder', { order, moment: moment, totalPrice});
+            }
+          } catch (e) {
+            return res.redirect('/');
           }
         },
 

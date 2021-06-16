@@ -1,7 +1,9 @@
 .env
 node_modules
-course_link.txt
+to_do.txt
 mix-manifest.json
 package-lock.json
 menu.json
 plan.txt
+collections.png
+db_dash.png

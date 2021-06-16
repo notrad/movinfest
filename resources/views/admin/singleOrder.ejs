@@ -1,0 +1,54 @@
+<section class="status py-5 text-gray-800">
+    <div class="container mx-auto md:w-1/2">
+
+      <div class="mx-auto rounded-xl">
+          <h1 class="font-bold text-lg mb-4 choose-title">Event Details</h1>
+
+          <div>
+            <div class="rounded-xl shadow-md bg-white py-4 px-8">
+              <div class="text-center sm:text-left mb-2 ">Order Number: <span class="bg-gray-100 py-1 rounded-full px-4 text-green-600 font-bold"><%= String(order._id).substring(19,24) %></span></div>
+              <div class="text-center sm:text-left">Event: <span class="font-bold"><%= order.eventtype %></span><span class="font-bold">, <%= moment(order.datetime).format('on Do MMMM YYYY @ hh:mm A') %></span></div>
+              <div class="text-center sm:text-left">Event Venue: <span class="font-bold"><%= order.address %></span></div>
+              <div class="text-center sm:text-left">Number Of Guests: <span class="font-bold"><%= order.guests %></span></div>
+              <div class="text-center sm:text-left">Contact Number: <span class="font-bold">+91 <%= order.phone %></span></div>
+            </div>
+
+
+              <div class="font-bold text-lg my-3 choose-title"><span>Items Ordered</span></div>
+
+              <div class="rounded-xl shadow-md bg-white py-4 px-8">
+                <% for(let item of Object.values(order.items)) {%>
+                  <% for(let inneritem of Object.values(item)) {%>
+                    <div class="text-center sm:text-left
+                    <% if(inneritem.category === 'veg') {%>
+                      text-green-700
+                      <% } else if(inneritem.category === 'non-veg') {%>
+                        text-red-700
+                        <% } else if(inneritem.category === 'dessert'){%>
+                          text-yellow-700
+                          <% }%>
+                          "><span class="font-bold"><%= inneritem.name %></span>
+                        </div>
+                        <%}%>
+                        <%}%>
+              </div>
+
+              <div class="font-bold text-md text-lg my-3 choose-title">Custom Requests</div>
+              <div class="rounded-xl shadow-md bg-white py-4 px-8">
+                <div class="italic text-md text-yellow-900"><span><%= order.customization %></span>
+                </div>
+              </div>
+
+              <div class="font-bold text-md text-lg my-3 choose-title">Other Details</div>
+              <div class="rounded-xl shadow-md bg-white py-4 px-8">
+                <div>Payment Type: <span class="italic text-md text-yellow-900"><%= order.paymentType %></span></div>
+                <div>Total Amount: <span class="italic text-md text-yellow-900">₹<%= totalPrice%></span></div>
+              </div>
+
+
+          </div>
+
+      </div>
+
+    </div>
+</section>

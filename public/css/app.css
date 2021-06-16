@@ -340,7 +340,7 @@ section.hero {
 
 section.cart {
   background: #f8f8f8;
-  min-height: calc(100vh - 86px);
+  min-height: calc(100vh - 96px);
 }
 section.cart .amount {
   color: #b79c6e;
@@ -348,7 +348,7 @@ section.cart .amount {
 
 section.login {
   background: #f8f8f8;
-  min-height: calc(100vh - 86px);
+  min-height: calc(100vh - 96px);
 }
 section.login a {
   color: #b79c6e;
@@ -368,7 +368,7 @@ a.link {
 
 section.status {
   background: #f8f8f8;
-  min-height: calc(100vh - 86px);
+  min-height: calc(100vh - 96px);
 }
 
 .status-box {
@@ -417,15 +417,15 @@ section.status {
 }
 
 .status-box ul li:nth-child(3) span:before {
-  content: "";
+  content: "";
 }
 
 .status-box ul li:nth-child(4) span:before {
-  content: "";
+  content: "";
 }
 
 .status-box ul li:nth-child(5) span:before {
-  content: "";
+  content: "";
 }
 
 .status-box ul li {
@@ -489,6 +489,15 @@ section.status {
 
 .choose-title::after {
   background: linear-gradient(to right, #b79c6e, transparent);
+}
+
+.orders {
+  min-height: calc(100vh - 96px);
+  background: #f8f8f8;
+}
+
+.social-media > i {
+  color: #b79c6e;
 }
 
 @media (max-width: 1060px) {

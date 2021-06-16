@@ -1,6 +1,6 @@
-<section class="orders light-section">
-    <div class="container mx-auto pt-12">
-        <h1 class="font-bold text-lg mb-4">All orders</h1>
+<section class="orders light-section bg-gray-100 text-gray-800">
+    <div class="container mx-auto pt-4 md:pt-12">
+        <h1 class="font-bold text-lg mb-4 choose-title">All orders</h1>
         <% if(messages.success) { %>
         <div id="success-alert" class="flex items-center bg-green-500 text-white text-sm font-bold px-4 py-3"
             role="alert">
@@ -11,39 +11,32 @@
             <p><%= messages.success %></p>
         </div>
         <% } %>
-        <table class="w-full table-auto bg-white">
-            <thead>
-                <tr>
-                    <th class="px-4 py-2 text-left">Orders</th>
-                    <th class="px-4 py-2 text-left">Phone</th>
-                    <th class="px-4 py-2 text-left">Address</th>
-                    <th class="px-4 py-2 text-left">Time</th>
-                </tr>
-            </thead>
-            <tbody>
+              <div class="flex flex-col md:flex-row flex-wrap">
                 <% if(orders.length) { %>
                 <% orders.forEach((order) => { %>
-                <tr>
-                    <td class="border px-4 py-2">
-                        <a class="link" href="/customer/orders/<%= order._id %>"><%= order._id %></a>
-                    </td>
-                    <td class="border px-4 py-2">
-                        <%= order.phone %>
-                    </td>
-                    <td class="border px-4 py-2">
-                        <%= order.address %>
-                    </td>
-                    <td class="border px-4 py-2">
-                        <%= moment(order.createdAt).format('hh:mm A') %>
-                    </td>
-                </tr>
+                  <% if(order.status !== 'completed') { %>
+                    <div class="rounded-xl shadow-md bg-white py-3 mb-3 sm:py-4 sm:px-8 md:ml-3">
+                      <div class="px-4 pb-2 font-bold text-lg border-b">
+                          <a class="link" href="/customer/orders/<%= order._id %>"><span>Order Number: </span><%= String(order._id).substring(19,24) %></a>
+                      </div>
+                      <div class="px-4 pt-2">
+                          Event: <%= order.eventtype %>
+                      </div>
+                      <div class="px-4">
+                          Venue: <%= order.address %>
+                      </div>
+                      <div class="px-4">
+                          Date & Time: <%= moment(order.datetime).format('Do MMMM YYYY @ hh:mm A') %>
+                      </div>
+                    </div>
+                  <%}%>
+
                 <% }) %>
                 <% } else { %>
-                <tr>
-                    <td class="p-4"><span>No orders found!</span></td>
-                </tr>
+                <div class="border px-4 py-2">
+                    <p class="p-4"><span>No orders found!</span></p>
+                </div>
                 <% } %>
-            </tbody>
-        </table>
+              </div>
     </div>
 </section>

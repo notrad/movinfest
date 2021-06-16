@@ -5,7 +5,7 @@ const passport = require('passport');
 function authController() {
 
   const _getRedirectUrl = (req) => {
-        return req.user.role === 'admin' ? '/admin/orders' : '/customer/orders'
+        return req.user.role === 'admin' ? '/admin/orders' : '/';
     }
 
   return {
@@ -72,7 +72,6 @@ function authController() {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const user = new User({
-        // name: name,
         name,
         email,
         password: hashedPassword

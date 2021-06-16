@@ -8,6 +8,10 @@ let removeFromCart = document.querySelectorAll('.remove-from-cart');
 let cartCounter = document.querySelector('#cartCounter');
 let cartAmount = document.querySelector('.amount');
 const alertMsg = document.querySelector('#success-alert');
+const guestsNumber = document.querySelector('#guestsNumber');
+const totalPlatePrice = document.querySelector('#totalPlatePrice');
+const subTotalPrice = document.querySelector('#subTotalPrice');
+const guestsNumberHolder = document.querySelector('#guestsNumberHolder');
 
 
 // add to cart, funcionality
@@ -19,7 +23,7 @@ function updateCart(item) {
       type: 'success',
       timeout: 1000,
       progressBar: false,
-      text: 'Added To Cart',
+      text: 'Added To Cart, <a href="/cart" class="text-md font-bold">Checkout Now</a>',
       layout: 'topRight'
     }).show();
   })
@@ -60,6 +64,11 @@ function removeCartItem(item, btn) {
         layout: 'topRight'
       }).show();
       btn.parentElement.parentElement.remove();
+      //update totalPlatePrice based on subTotalPrice
+      if (totalPlatePrice) {
+          totalPlatePrice.innerText = `₹${ String( ( guestsNumber.value ? parseFloat(guestsNumber.value) : 1.0) * parseFloat(subTotalPrice.innerText.substring(1,4))) }`;
+      }
+
     }
 
 
@@ -84,10 +93,22 @@ removeFromCart.forEach((btn) => {
 });
 
 
+//totalPlatePrice updater
+if (window.location.pathname.includes('cart') && guestsNumber) {
+
+  guestsNumber.addEventListener('change', (e) => {
+      totalPlatePrice.innerText = `₹${String(parseFloat(e.target.value) * parseFloat(subTotalPrice.innerText.substring(1,4)))}`;
+      guestsNumberHolder.innerText = e.target.value;
+    });
+
+}
+
+
+//Noty alert message remover
 if(alertMsg) {
     setTimeout(() => {
         alertMsg.remove()
-    }, 2000)
+    }, 3000)
 }
 
 
@@ -111,7 +132,7 @@ function updateStatus(order) {
        }
        if(dataProp === order.status) {
             stepCompleted = false;
-            time.innerText = moment(order.updatedAt).format('Do MMMM YYYY - hh:mm A');
+            time.innerText = moment(order.updatedAt).format('@ Do MMMM YYYY - hh:mm A');
             status.appendChild(time);
            if(status.nextElementSibling) {
             status.nextElementSibling.classList.add('current');
@@ -130,7 +151,7 @@ if(order) {
 }
 
 let adminAreaPath = window.location.pathname;
-if(adminAreaPath.includes('admin')) {
+if(adminAreaPath.includes('admin') && document.querySelector('#orderCardBody')) {
     initAdmin(socket);
     socket.emit('join', 'adminRoom');
 }

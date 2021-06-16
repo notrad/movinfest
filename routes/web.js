@@ -12,6 +12,7 @@ const adminAuth = require('../app/http/middlewares/adminAuth');
 function initRoutes(app) {
 
   app.get('/', homeController().index);
+  app.get('/about-us', homeController().about);
 
   app.get('/login', guest, authController().login);
   app.post('/login', authController().postLogin);
@@ -29,6 +30,7 @@ function initRoutes(app) {
   app.get('/customer/orders/:id', auth, orderController().show);
 
   app.get('/admin/orders', adminAuth, adminOrderController().index);
+  app.get('/admin/orders/:id', adminAuth, adminOrderController().orderDetails);
   app.post('/admin/order/status', adminAuth, statusController().update);
 
   app.get('*', errorController().index);

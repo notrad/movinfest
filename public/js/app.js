@@ -1855,7 +1855,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function initAdmin(socket) {
-  var orderTableBody = document.querySelector('#orderTableBody');
+  var orderCardBody = document.querySelector('#orderCardBody');
   var orders = [];
   var markup;
   axios__WEBPACK_IMPORTED_MODULE_0___default().get('/admin/orders', {
@@ -1864,23 +1864,20 @@ function initAdmin(socket) {
     }
   }).then(function (res) {
     orders = res.data;
-    markup = generateMarkup(orders);
-    orderTableBody.innerHTML = markup;
+    markup = generateOrderMarkup(orders);
+    orderCardBody.innerHTML = markup;
   })["catch"](function (err) {
     console.log(err);
   });
 
-  function renderItems(items) {
-    var parsedItems = Object.values(items);
-    return parsedItems.map(function (menuItem) {
-      return "\n                <p>".concat(menuItem.item.name, " - ").concat(menuItem.qty, " pcs </p>\n            ");
-    }).join('');
-  }
-
-  function generateMarkup(orders) {
-    return orders.map(function (order) {
-      return "\n                <tr>\n                <td class=\"border px-4 py-2 text-green-900\">\n                    <p>".concat(order._id, "</p>\n                    <div>").concat(renderItems(order.items), "</div>\n                </td>\n                <td class=\"border px-4 py-2\">").concat(order.customerId.name, "</td>\n                <td class=\"border px-4 py-2\">").concat(order.address, "</td>\n                <td class=\"border px-4 py-2\">\n                    <div class=\"inline-block relative w-64\">\n                        <form action=\"/admin/order/status\" method=\"POST\">\n                            <input type=\"hidden\" name=\"orderId\" value=\"").concat(order._id, "\">\n                            <select name=\"status\" onchange=\"this.form.submit()\"\n                                class=\"block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline\">\n                                <option value=\"order_placed\"\n                                    ").concat(order.status === 'order_placed' ? 'selected' : '', ">\n                                    Placed</option>\n                                <option value=\"confirmed\" ").concat(order.status === 'confirmed' ? 'selected' : '', ">\n                                    Confirmed</option>\n                                <option value=\"prepared\" ").concat(order.status === 'prepared' ? 'selected' : '', ">\n                                    Prepared</option>\n                                <option value=\"delivered\" ").concat(order.status === 'delivered' ? 'selected' : '', ">\n                                    Delivered\n                                </option>\n                                <option value=\"completed\" ").concat(order.status === 'completed' ? 'selected' : '', ">\n                                    Completed\n                                </option>\n                            </select>\n                        </form>\n                        <div\n                            class=\"pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700\">\n                            <svg class=\"fill-current h-4 w-4\" xmlns=\"http://www.w3.org/2000/svg\"\n                                viewBox=\"0 0 20 20\">\n                                <path\n                                    d=\"M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z\" />\n                            </svg>\n                        </div>\n                    </div>\n                </td>\n                <td class=\"border px-4 py-2\">\n                    ").concat(moment__WEBPACK_IMPORTED_MODULE_1___default()(order.createdAt).format('hh:mm A'), "\n                </td>\n                <td class=\"border px-4 py-2\">\n                    ").concat(order.paymentStatus ? 'paid' : 'Not paid', "\n                </td>\n            </tr>\n        ");
-    }).join('');
+  function generateOrderMarkup(orders) {
+    if (Object.keys(orders).length === 0) {
+      return "<h1 class=\"text-center text-xl font-bold\">No Orders Yet!</h1>";
+    } else {
+      return orders.map(function (order) {
+        return "\n            <div class=\"rounded-xl shadow-md bg-white py-3 mb-3 sm:py-4 sm:px-8 md:ml-2 flex-1\">\n              <div class=\"px-4 pb-2 font-bold text-lg border-b\">\n                  <a class=\"link\" href=\"/admin/orders/".concat(order._id, "\"><span>Order Number: </span>").concat(order._id.substring(19, 24), " </a>\n              </div>\n              <div class=\"px-4 my-1 font-bold\">\n                  Customer: ").concat(order.customerId.name, "\n              </div>\n              <div class=\"px-4 mb-1 font-bold\">\n                  Phone: +91 ").concat(order.phone, "\n              </div>\n              <div class=\"px-4 mt-1 mb-2 font-bold\">\n                  Order Status:\n                  <div class=\"inline-block relative w-64\">\n                      <form action=\"/admin/order/status\" method=\"POST\">\n                          <input type=\"hidden\" name=\"orderId\" value=\"").concat(order._id, "\">\n                          <select name=\"status\" onchange=\"this.form.submit()\"\n                              class=\"block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline\">\n                              <option value=\"order_placed\"\n                                  ").concat(order.status === 'order_placed' ? 'selected' : '', ">\n                                  Placed</option>\n                              <option value=\"confirmed\" ").concat(order.status === 'confirmed' ? 'selected' : '', ">\n                                  Confirmed</option>\n                              <option value=\"prepared\" ").concat(order.status === 'prepared' ? 'selected' : '', ">\n                                  Prepared</option>\n                              <option value=\"delivered\" ").concat(order.status === 'delivered' ? 'selected' : '', ">\n                                  Delivered\n                              </option>\n                              <option value=\"completed\" ").concat(order.status === 'completed' ? 'selected' : '', ">\n                                  Completed\n                              </option>\n                          </select>\n                      </form>\n                      <div\n                          class=\"pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700\">\n                          <svg class=\"fill-current h-4 w-4\" xmlns=\"http://www.w3.org/2000/svg\"\n                              viewBox=\"0 0 20 20\">\n                              <path\n                                  d=\"M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z\" />\n                          </svg>\n                      </div>\n                  </div>\n              </div>\n              <div class=\"px-4 mb-1 font-bold\">\n                  Order Received On: ").concat(moment__WEBPACK_IMPORTED_MODULE_1___default()(order.createdAt).format('Do MMMM YYYY, hh:mm A'), "\n              </div>\n              <div class=\"px-4 mb-1 font-bold\">\n                  Payment Status: ").concat(order.paymentStatus ? 'paid' : 'Not Paid (Cash On Delivery)', "\n              </div>\n            </div>\n                ");
+      }).join('');
+    }
   }
 
   socket.on('orderPlaced', function (order) {
@@ -1891,8 +1888,8 @@ function initAdmin(socket) {
       progressBar: false
     }).show();
     orders.unshift(order);
-    orderTableBody.innerHTML = '';
-    orderTableBody.innerHTML = generateMarkup(orders);
+    orderCardBody.innerHTML = '';
+    orderCardBody.innerHTML = generateOrderMarkup(orders);
   });
 }
 
@@ -1927,7 +1924,11 @@ var addToCart = document.querySelectorAll('.add-to-cart');
 var removeFromCart = document.querySelectorAll('.remove-from-cart');
 var cartCounter = document.querySelector('#cartCounter');
 var cartAmount = document.querySelector('.amount');
-var alertMsg = document.querySelector('#success-alert'); // add to cart, funcionality
+var alertMsg = document.querySelector('#success-alert');
+var guestsNumber = document.querySelector('#guestsNumber');
+var totalPlatePrice = document.querySelector('#totalPlatePrice');
+var subTotalPrice = document.querySelector('#subTotalPrice');
+var guestsNumberHolder = document.querySelector('#guestsNumberHolder'); // add to cart, funcionality
 
 function updateCart(item) {
   axios__WEBPACK_IMPORTED_MODULE_0___default().post('/update-cart', item).then(function (res) {
@@ -1936,7 +1937,7 @@ function updateCart(item) {
       type: 'success',
       timeout: 1000,
       progressBar: false,
-      text: 'Added To Cart',
+      text: 'Added To Cart, <a href="/cart" class="text-md font-bold">Checkout Now</a>',
       layout: 'topRight'
     }).show();
   })["catch"](function (err) {
@@ -1972,7 +1973,11 @@ function removeCartItem(item, btn) {
         text: 'Removed From Cart',
         layout: 'topRight'
       }).show();
-      btn.parentElement.parentElement.remove();
+      btn.parentElement.parentElement.remove(); //update totalPlatePrice based on subTotalPrice
+
+      if (totalPlatePrice) {
+        totalPlatePrice.innerText = "\u20B9".concat(String((guestsNumber.value ? parseFloat(guestsNumber.value) : 1.0) * parseFloat(subTotalPrice.innerText.substring(1, 4))));
+      }
     }
   })["catch"](function (err) {
     new (noty__WEBPACK_IMPORTED_MODULE_1___default())({
@@ -1991,12 +1996,20 @@ removeFromCart.forEach(function (btn) {
     var item = JSON.parse(btn.dataset.item);
     removeCartItem(item, btn);
   });
-});
+}); //totalPlatePrice updater
+
+if (window.location.pathname.includes('cart') && guestsNumber) {
+  guestsNumber.addEventListener('change', function (e) {
+    totalPlatePrice.innerText = "\u20B9".concat(String(parseFloat(e.target.value) * parseFloat(subTotalPrice.innerText.substring(1, 4))));
+    guestsNumberHolder.innerText = e.target.value;
+  });
+} //Noty alert message remover
+
 
 if (alertMsg) {
   setTimeout(function () {
     alertMsg.remove();
-  }, 2000);
+  }, 3000);
 } // Change order status
 
 
@@ -2021,7 +2034,7 @@ function updateStatus(order) {
 
     if (dataProp === order.status) {
       stepCompleted = false;
-      time.innerText = moment__WEBPACK_IMPORTED_MODULE_3___default()(order.updatedAt).format('Do MMMM YYYY - hh:mm A');
+      time.innerText = moment__WEBPACK_IMPORTED_MODULE_3___default()(order.updatedAt).format('@ Do MMMM YYYY - hh:mm A');
       status.appendChild(time);
 
       if (status.nextElementSibling) {
@@ -2040,7 +2053,7 @@ if (order) {
 
 var adminAreaPath = window.location.pathname;
 
-if (adminAreaPath.includes('admin')) {
+if (adminAreaPath.includes('admin') && document.querySelector('#orderCardBody')) {
   (0,_admin__WEBPACK_IMPORTED_MODULE_2__.initAdmin)(socket);
   socket.emit('join', 'adminRoom');
 }

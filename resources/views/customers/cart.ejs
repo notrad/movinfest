@@ -4,7 +4,7 @@
 
   <div class="order container mx-auto xl:w-1/2 text-gray-800">
 
-    <div class="flex items-center border-b border-gray-300 pb-4">
+    <div class="flex items-center border-b border-gray-300 pb-4 text-gray-800">
       <img src="/img/cart-black.png" alt="cart-icon">
       <h1 class="font-bold ml-4 text-2xl">Order Summary</h1>
     </div>
@@ -36,21 +36,38 @@
       <%}%>
 
     </div>
-    <hr>
     <div class="text-right py-4">
       <div class="">
-        <span class="amount text-2xl font-bold ml-2">₹<%= session.cart.totalPrice %></span>
+        <span class="text-lg font-bold">Subtotal is</span>
+        <span class="amount text-2xl font-bold ml-2" id="subTotalPrice">₹<%= session.cart.totalPrice %></span>
         <span class="text-lg font-bold"><em>/Plate</em></span>
       </div>
+    <hr class="mt-3">
 
       <% if(user) {%>
       <div class="">
-        <form action="/orders" method="POST" class="mt-12">
+        <form action="/orders" method="POST" class="mt-3">
+
+          <h1 class="text-xl font-bold mb-3">Event Details</h1>
           <% if (messages.error) { %>
             <span class="block text-red-500 text-sm mb-1"><%= messages.error %></span>
           <% }%>
-          <input class="border border-gray-400 p-2 w-full md:w-1/2 mb-4 rounded" type="text" placeholder="Phone Number" name="phone">
-          <textarea name="address" class="border border-gray-400 p-2 w-full md:w-1/2 rounded" placeholder="Address"></textarea>
+          <input class="border border-gray-400 p-2 w-full md:w-1/2 mb-4 rounded" type="number" placeholder="Number Of Guests (10 -1000 or More)" name="guests" min="1" id="guestsNumber" required>
+          <input class="border border-gray-400 p-2 w-full md:w-1/2 mb-4 rounded" type="tel" placeholder="Phone Number (9676567890)" name="phone" pattern="[0-9]{10}" required>
+          <div class="flex flex-col items-end">
+          <label for="eventtype">Weddings, Birthdays, Reunions</label>
+          <input class="border border-gray-400 p-2 w-full md:w-1/2 mb-4 rounded" id="eventtype" type="text" placeholder="What Is The Event? " name="eventtype" required>
+        </div>
+          <div class="flex flex-col items-end">
+            <label for="eventtime">Event Date and Time</label>
+            <input class="border border-gray-400 p-2 w-full md:w-1/2 mb-4 rounded" type="datetime-local" name="datetime" id="eventtime" required>
+          </div>
+          <textarea name="address" class="border border-gray-400 p-2 w-full md:w-1/2 rounded" placeholder="Event Venue" required></textarea>
+          <textarea name="customization" class="border border-gray-400 p-2 w-full md:w-1/2 rounded" placeholder="Any Custom Requirements (This Field Is Optional)"></textarea>
+          <div class="mt-2">
+            <span class="text-lg font-bold">Total For <span id="guestsNumberHolder">1</span> Guest(s) is</span>
+            <span id="totalPlatePrice" class="amount text-2xl font-bold ml-2">₹<%= session.cart.totalPrice %></span>
+          </div>
           <div class="">
             <button type="submit" name="button" class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-6">Order Now</button>
           </div>

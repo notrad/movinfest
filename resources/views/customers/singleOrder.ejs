@@ -1,25 +1,86 @@
-<section class="status">
+<section class="status text-gray-800">
     <div class="container mx-auto">
 
-        <div class="status-box w-full lg:w-2/3 mx-auto">
+        <div class="status-box w-full lg:w-2/3 mx-auto ">
 
-            <div class="flex items-center justify-between mb-12">
-                <h1 class="text-xl font-bold">Track Order status</h1>
-                <h6 class="bg-white py-1 rounded-full px-4 text-green-600 text-xs"><%=
-                    order._id %></h6>
-                <input id="hiddenInput" type="hidden" value="<%= JSON.stringify(order) %>">
+            <% if (order.status === 'completed') {%>
+              <div class="flex flex-col sm:flex-row items-center justify-between mb-12">
+                  <h1 class="text-xl font-bold">Cheers, This Event Is Complete.</h1>
+                  <h6 class="bg-white py-1 mt-2 sm:mt-0 rounded-full px-4 text-green-600 text-xs">Order Number: <%=
+                      String(order._id).substring(19,24) %></h6>
+                  <input id="hiddenInput" type="hidden" value="<%= JSON.stringify(order) %>">
+              </div>
+            <%} else {%>
+              <div class="flex flex-col sm:flex-row items-center justify-between mb-12">
+                  <h1 class="text-xl font-bold">Order Status</h1>
+                  <h6 class="bg-white py-1 mt-2 sm:mt-0 rounded-full px-4 text-green-600 text-xs">Order Number: <%=
+                      String(order._id).substring(19,24) %></h6>
+                  <input id="hiddenInput" type="hidden" value="<%= JSON.stringify(order) %>">
+              </div>
+
+              <ul>
+                  <li class="status_line text-sm md:text-xl pb-16" data-status="order_placed"><span>Order Placed</span>
+                  </li>
+                  <li class="status_line text-sm md:text-xl pb-16" data-status="confirmed"><span>Order Confirmation</span>
+                  </li>
+                  <li class="status_line text-sm md:text-xl pb-16" data-status="prepared"><span>Preparation</span></li>
+                  <li class="status_line text-sm md:text-xl pb-16" data-status="delivered"><span>Ready at the Venue </span>
+                  </li>
+                  <li class="status_line text-sm md:text-xl" data-status="completed"><span>Complete</span></li>
+              </ul>
+            <%} %>
+
+
+        </div>
+
+        <div class="mx-auto py-12 md:w-1/2">
+            <h1 class="font-bold text-lg mb-4 choose-title">Event Details</h1>
+
+            <div>
+                <div class="rounded-xl shadow-md bg-white py-4 px-8">
+
+                  <div class="text-center sm:text-left">Event: <span class="font-bold"><%= order.eventtype %></span><span class="font-bold">, <%= moment(order.datetime).format('on Do MMMM YYYY @ hh:mm A') %></span></div>
+                  <div class="text-center sm:text-left">Event Venue: <span class="font-bold"><%= order.address %></span></div>
+                  <div class="text-center sm:text-left">Number Of Guests: <span class="font-bold"><%= order.guests %></span></div>
+                  <div class="text-center sm:text-left">Phone Number Sent: <span class="font-bold">+91 <%= order.phone %></span></div>
+
+                </div>
+
+
+                <div class="font-bold text-lg my-3 choose-title"><span>Items Ordered</span></div>
+
+                <div class="rounded-xl shadow-md bg-white py-4 px-8">
+
+
+                <% for(let item of Object.values(order.items)) {%>
+                  <% for(let inneritem of Object.values(item)) {%>
+                  <div class="text-center sm:text-left
+                  <% if(inneritem.category === 'veg') {%>
+                    text-green-700
+                  <% } else if(inneritem.category === 'non-veg') {%>
+                    text-red-700
+                  <% } else if(inneritem.category === 'dessert'){%>
+                    text-yellow-700
+                  <% }%>
+                  "><span class="font-bold"><%= inneritem.name %></span>
+                  </div>
+                <%}%>
+                <%}%>
+
+                </div>
+
+                <div class="font-bold text-md text-lg my-3 choose-title">Custom Requests</div>
+                <div class="rounded-xl shadow-md bg-white py-4 px-8 italic text-md text-yellow-900"><span><%= order.customization %></span>
+                </div>
+
+                <div class="font-bold text-md text-lg my-3 choose-title">Other Details</div>
+                <div class="rounded-xl shadow-md bg-white py-4 px-8">
+                  <div>Payment Type: <span class="italic text-md text-yellow-900"><%= order.paymentType %></span></div>
+                  <div>Total Amount: <span class="italic text-md text-yellow-900">₹<%= totalPrice%></span></div>
+                </div>
+
+
             </div>
-
-            <ul>
-                <li class="status_line text-sm md:text-xl pb-16" data-status="order_placed"><span>Order Placed</span>
-                </li>
-                <li class="status_line text-sm md:text-xl pb-16" data-status="confirmed"><span>Order Confirmation</span>
-                </li>
-                <li class="status_line text-sm md:text-xl pb-16" data-status="prepared"><span>Preparation</span></li>
-                <li class="status_line text-sm md:text-xl pb-16" data-status="delivered"><span>Out for delivery </span>
-                </li>
-                <li class="status_line text-sm md:text-xl" data-status="completed"><span>Complete</span></li>
-            </ul>
 
         </div>
 
