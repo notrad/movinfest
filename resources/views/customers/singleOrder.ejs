@@ -76,7 +76,8 @@
                 <div class="font-bold text-md text-lg my-3 choose-title">Other Details</div>
                 <div class="rounded-xl shadow-md bg-white py-4 px-8">
                   <div>Payment Type: <span class="italic text-md text-yellow-900"><%= order.paymentType %></span></div>
-                  <div>Total Amount: <span class="italic text-md text-yellow-900">₹<%= totalPrice%></span></div>
+                  <div>Amount Per Plate: <span class="italic text-md text-yellow-900">₹<%=totalPrice %></span></div>
+                  <div>Total Amount: <span class="italic text-md text-yellow-900">₹<%= totalPrice * order.guests%></span></div>
                 </div>
 
 
