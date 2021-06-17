@@ -23,7 +23,9 @@ export function initAdmin(socket) {
 
     function generateOrderMarkup(orders) {
       if (Object.keys(orders).length === 0) {
-        return `<h1 class="text-center text-xl font-bold">No Orders Yet!</h1>`;
+        return `<div class="rounded-xl shadow-md px-4 py-2 font-bold capitalize">
+            <p class="p-4"><span>No orders yet!</span></p>
+        </div>`;
       } else {
         return orders.map(order => {
             return `
