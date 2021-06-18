@@ -18,13 +18,19 @@
         <div class="flex-1 text-center mt-3 md:ml-4 md:text-left">
           <h1 class="font-bold text-lg md:text-md"><%= item.item.name %></h1>
           <span class="uppercase py-1 px-2 mt-4 rounded-full text-xs text-white
-          <% if(item.item.category === 'veg') {%>
+          <% if(item.item.category === 'veg' || item.item.category === 'rice & roti\'s (veg)') {%>
             bg-green-500
-          <% } else if(item.item.category === 'non-veg') {%>
+          <% } else if(item.item.category === 'non-veg' || item.item.category === 'rice & roti\'s (non-veg)') {%>
             bg-red-500
           <% } else if(item.item.category === 'dessert'){%>
             bg-yellow-500
-          <% }%>
+          <% } else if(item.item.category === 'salad') {%>
+            bg-purple-500
+          <% } else if(item.item.category === 'drinks') {%>
+            bg-blue-500
+          <% } %>
+
+
           "><%= item.item.category %></span>
         </div>
         <span class="flex-1 my-2 mt-7 md:mt-0 md:my-0">

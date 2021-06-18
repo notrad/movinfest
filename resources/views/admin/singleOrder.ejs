@@ -20,17 +20,21 @@
                 <% for(let item of Object.values(order.items)) {%>
                   <% for(let inneritem of Object.values(item)) {%>
                     <div class="text-center sm:text-left
-                    <% if(inneritem.category === 'veg') {%>
+                    <% if(inneritem.category === 'veg' || inneritem.category === 'rice & roti\'s (veg)') {%>
                       text-green-700
-                      <% } else if(inneritem.category === 'non-veg') {%>
-                        text-red-700
-                        <% } else if(inneritem.category === 'dessert'){%>
-                          text-yellow-700
-                          <% }%>
-                          "><span class="font-bold"><%= inneritem.name %></span>
-                        </div>
-                        <%}%>
-                        <%}%>
+                    <% } else if(inneritem.category === 'non-veg' || inneritem.category === 'rice & roti\'s (non-veg)') {%>
+                      text-red-700
+                    <% } else if(inneritem.category === 'dessert'){%>
+                      text-yellow-700
+                    <% } else if(inneritem.category === 'salad') {%>
+                      text-purple-700
+                      <%} else if (inneritem.category === 'drinks') {%>
+                        text-blue-700
+                      <%}%>
+                    "><span class="font-bold"><%= inneritem.name %></span>
+                    </div>
+                  <%}%>
+                  <%}%>
               </div>
 
               <div class="font-bold text-md text-lg my-3 choose-title">Custom Requests</div>

@@ -15,7 +15,7 @@ const orderSchema = new Schema({
     address: { type: String, required: true},
     customization: { type: String, required: true},
     paymentType: { type: String, default: 'COD'},
-    // paymentStatus: { type: Boolean, default: false },
+    paymentStatus: { type: Boolean, default: false },
     status: { type: String, default: 'order_placed'},
 }, { timestamps: true });
 
