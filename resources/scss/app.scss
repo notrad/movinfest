@@ -2,6 +2,7 @@
 @import "~noty/src/noty.scss";
 @import "~noty/src/themes/mint.scss";
 
+// TODO: install tailwind using npm as a dependency
 
 html {
   box-sizing: border-box;
@@ -217,7 +218,7 @@ section.status {
 .choose-title::after, .choose-title::before{
   content: "";
   display: block;
-  height: 0.5rem;
+  height: 0.1rem;
   background: linear-gradient(to left, $primary, transparent);
 }
 

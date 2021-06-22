@@ -40,7 +40,7 @@ app.use(session({
     touchAfter: 24 * 3600
     // client: connection.getClient(), // works only after db.once is returned
   }),
-  cookie: { maxAge: 1000*60*60*24 } // session is save for 24 hours on the db
+  cookie: { maxAge: 1000*60*60*24 } // session is saved for 24 hours on the db
 }));
 
 
