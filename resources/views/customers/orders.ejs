@@ -15,7 +15,7 @@
                 <% if(orders.length) { %>
                 <% orders.forEach((order) => { %>
                   <% if(order.status !== 'completed') { %>
-                    <div class="rounded-xl shadow-md bg-white py-3 mb-3 sm:py-4 sm:px-8 md:ml-3">
+                    <div class="rounded shadow-md bg-white py-3 mb-3 sm:py-4 sm:px-8 md:ml-3">
                       <div class="px-4 pb-2 font-bold text-lg border-b">
                           <a class="link" href="/customer/orders/<%= order._id %>"><span>Order Number: </span><%= String(order._id).substring(19,24) %></a>
                       </div>

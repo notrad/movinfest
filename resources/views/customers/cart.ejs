@@ -13,7 +13,7 @@
 
       <% for(let item of Object.values(session.cart.items)) {%>
 
-      <div class="transition duration-500 ease-in flex flex-col sm:flex-row items-center my-4 rounded-xl shadow-md bg-white py-4 px-8">
+      <div class="transition duration-500 ease-in flex flex-col sm:flex-row items-center my-4 rounded-md shadow-md bg-white py-4 px-8">
         <img class="w-24" src="/img/<%= item.item.image %>" alt="">
         <div class="flex-1 text-center mt-3 md:ml-4 md:text-left">
           <h1 class="font-bold text-lg md:text-md"><%= item.item.name %></h1>
@@ -57,10 +57,10 @@
 
           <h1 class="text-xl font-bold mb-3">Event Details</h1>
           <% if (messages.error) { %>
-            <span class="block text-red-500 text-sm mb-1"><%= messages.error %></span>
+            <span class="block text-red-500 text-sm mb-3"><%= messages.error %></span>
           <% }%>
           <input class="border border-gray-400 p-2 w-full md:w-1/2 mb-4 rounded" type="number" placeholder="Number Of Guests (10 -1000 or More)" name="guests" min="1" id="guestsNumber" required>
-          <input class="border border-gray-400 p-2 w-full md:w-1/2 mb-4 rounded" type="tel" placeholder="Phone Number (9676567890)" name="phone" pattern="[0-9]{10}" required>
+          <input class="border border-gray-400 p-2 w-full md:w-1/2 mb-4 rounded" type="tel" placeholder="Enter 10-digit Phone Number" name="phone" pattern="[0-9]{10}" required>
           <div class="flex flex-col items-end">
           <label for="eventtype">Weddings, Birthdays, Reunions</label>
           <input class="border border-gray-400 p-2 w-full md:w-1/2 mb-4 rounded" id="eventtype" type="text" placeholder="What Is The Event? " name="eventtype" required>

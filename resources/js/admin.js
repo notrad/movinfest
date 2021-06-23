@@ -23,13 +23,13 @@ export function initAdmin(socket) {
 
     function generateOrderMarkup(orders) {
       if (Object.keys(orders).length === 0) {
-        return `<div class="rounded-xl shadow-md px-4 py-2 font-bold capitalize">
+        return `<div class="rounded shadow-md px-4 py-2 font-bold capitalize">
             <p class="p-4"><span>No orders yet!</span></p>
         </div>`;
       } else {
         return orders.map(order => {
             return `
-            <div class="rounded-xl shadow-md bg-white py-3 mb-3 sm:py-4 sm:px-8 md:ml-2 flex-1">
+            <div class="rounded shadow-md bg-white py-3 mb-3 sm:py-4 sm:px-8 md:ml-2 flex-1">
               <div class="px-4 pb-2 font-bold text-lg border-b">
                   <a class="link" href="/admin/orders/${ order._id }"><span>Order Number: </span>${ order._id.substring(19,24) } </a>
               </div>
