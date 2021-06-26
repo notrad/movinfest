@@ -1,32 +1,22 @@
 const express = require('express');
-const dotenv = require('dotenv');
 const ejs = require('ejs');
 const expressLayout = require('express-ejs-layouts');
 const path = require('path');
 const routes = require('./routes/web');
-const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('express-flash');
-const MongoDbStore = require('connect-mongo');
 const passport = require('passport');
 const passportInit = require('./app/config/passport');
+const MongoDbStore = require('connect-mongo');
 const Emitter = require('events');
+const Database = require('./app/config/databaseConnection');
 
 
 //configuration
-dotenv.config();
 const app = express();
+new Database();
 const PORT = process.env.PORT || 3000;
 const eventEmitter = new Emitter();
-
-//database connection
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: true });
-const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log(`Database connection successful to: ${process.env.DATABASE_URL}`);
-}).catch(err => {
-  console.log('Connection to Database failed: '+ err);
-});
 
 
 //session config
