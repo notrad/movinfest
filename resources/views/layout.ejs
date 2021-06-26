@@ -27,26 +27,26 @@
       </button>
     </div>
     <nav :class="{'flex': open, 'hidden': !open}" class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row navigation">
-      <a class="px-4 py-2 mt-2 font-semibold md:mt-0 md:ml-4" href="/">Menu</a>
-      <a class="px-4 py-2 mt-2 font-semibold md:mt-0 md:ml-4" href="/about-us">About Us</a>
+      <a class="px-4 py-2 mt-2 font-semibold md:mt-0" href="/">Menu</a>
+      <a class="px-4 py-2 mt-2 font-semibold md:mt-0" href="/about-us">About Us</a>
 
       <% if(user) { %>
 
         <% if(user.role === 'admin') {%>
-          <a class="px-4 py-2 mt-2 font-semibold md:mt-0 md:ml-4" href="/admin/orders">Hello, <%= user.name%></a>
+          <a class="px-4 py-2 mt-2 font-semibold md:mt-0" href="/admin/orders">Hello, <%= user.name%></a>
         <% } else { %>
-          <a class="px-4 py-2 mt-2 font-semibold md:mt-0 md:ml-4" href="/customer/orders">Hello, <%= user.name%></a>
+          <a class="px-4 py-2 mt-2 font-semibold md:mt-0" href="/customer/orders">Hello, <%= user.name%></a>
         <%}%>
 
 
-        <form id="logout" action="/logout" method="POST" class="px-4 py-2 mt-2 font-semibold md:mt-0 md:ml-4">
+        <form id="logout" action="/logout" method="POST" class="px-4 py-2 mt-2 font-semibold md:mt-0">
           <a onclick="document.getElementById('logout').submit()" href="#">Logout</a>
         </form>
 
       <% } else { %>
 
-        <a class="px-4 py-2 mt-2 font-semibold md:mt-0 md:ml-4" href="/register">Register</a>
-        <a class="px-4 py-2 mt-2 font-semibold md:mt-0 md:ml-4" href="/login">Login</a>
+        <a class="px-4 py-2 mt-2 font-semibold md:mt-0" href="/register">Register</a>
+        <a class="px-4 py-2 mt-2 font-semibold md:mt-0" href="/login">Login</a>
 
       <% } %>
 

@@ -13,7 +13,7 @@
 
       <% for(let item of Object.values(session.cart.items)) {%>
 
-      <div class="transition duration-500 ease-in flex flex-col sm:flex-row items-center my-4 rounded-xl shadow-md bg-white py-4 px-8">
+      <div class="transition duration-500 ease-in flex flex-col sm:flex-row items-center my-4 rounded-lg shadow-md bg-white py-4 px-8">
         <img class="w-24 rounded-full" src="/img/<%= item.item.image %>" alt="">
         <div class="flex-1 text-center mt-3 md:ml-4 md:text-left">
           <h1 class="font-bold text-lg md:text-md"><%= item.item.name %></h1>
