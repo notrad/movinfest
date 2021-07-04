@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "catering management system",
   "main": "index.js",
-  "repository": "none",
+  "repository": "https://github.com/notrad/movinfest.git",
   "scripts": {
     "test": "jest",
     "serve": "node server",
