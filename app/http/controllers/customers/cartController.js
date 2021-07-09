@@ -1,8 +1,10 @@
+const moment = require('moment');
+
 function cartController() {
   return {
 
     index(req, res) {
-      res.render('customers/cart');
+      res.render('customers/cart', {  moment: moment });
     },
 
     // add single item to cart
@@ -45,7 +47,7 @@ function cartController() {
 
           delete req.session.cart;
           return res.json(cartStateData);
-          
+
         } else {
 
           return res.json({ totalQty: req.session.cart.totalQty, totalPrice: req.session.cart.totalPrice , refreshPage: false});

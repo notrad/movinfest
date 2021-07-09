@@ -17,8 +17,16 @@ function orderController() {
     store(req, res) {
       const { phone, address, guests, eventtype, datetime, customization } = req.body;
 
+    // TODO: input sanitization
+
       if (!phone || !address || !guests || !eventtype || !datetime ) {
         req.flash('error', 'All Fields Are Required');
+
+        return res.redirect('/cart');
+      }
+
+      if ( datetime <= (moment().format('YYYY-MM-DDTHH:MM')) ) {
+        req.flash('error', 'Invalid Date');
         return res.redirect('/cart');
       }
 

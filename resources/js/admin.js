@@ -31,7 +31,7 @@ export function initAdmin(socket) {
             return `
             <div class="rounded shadow-md bg-white py-3 mb-3 sm:py-4 sm:px-8 md:ml-2 flex-1">
               <div class="px-4 pb-2 font-bold text-lg border-b">
-                  <a class="link" href="/admin/orders/${ order._id }"><span>Order Number: </span>${ order._id.substring(19,24) } </a>
+                  <a class="link bg-gray-100 py-1 rounded-full px-4 text-green-600 font-bold" href="/admin/orders/${ order._id }"><span >Order Number: </span>${ order._id.substring(19,24) } </a>
               </div>
               <div class="px-4 my-1 font-bold">
                   Customer: ${ order.customerId.name }
@@ -72,7 +72,7 @@ export function initAdmin(socket) {
                   </div>
               </div>
               <div class="px-4 mb-1 font-bold">
-                  Order Received On: ${ moment(order.createdAt).format('Do MMMM YYYY, hh:mm A') }
+                  Received On: ${ moment(order.createdAt).format('Do MMMM YYYY, hh:mm A') }
               </div>
               <div class="px-4 mb-1 font-bold">
                   Payment Status: ${ order.paymentStatus ? 'paid' : 'Not Paid (Cash On Delivery)' }

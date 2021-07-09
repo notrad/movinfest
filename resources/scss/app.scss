@@ -90,9 +90,14 @@ section.login {
 .noty_theme__mint {
   border-radius: 50px !important;
   padding-left: 2rem !important;
+  background: $primary !important;
 }
 
-a.link {
+#success-alert {
+  background: $primary;
+}
+
+.link {
   color: $primary;
 }
 
@@ -102,7 +107,7 @@ section.status {
 }
 
 .status-box{
-  padding: 3rem 0 0;
+  padding: 1rem 0 0;
 }
 
 .status-box ul {
@@ -196,10 +201,12 @@ section.status {
 // Current status
 .status-box ul li.current span {
     color: $primary;
+    animation: pulse 2s infinite;
 }
 
 .status-box ul li.current span:after {
     background: $primary;
+    animation: pulse-dot 2s infinite;
 }
 
 .status-box ul li small {
@@ -234,6 +241,35 @@ section.status {
 .social-media > i {
   color: $primary;
 }
+
+@keyframes pulse {
+  0% {
+    color: $primary;
+  }
+
+  50% {
+    color: #232323;
+  }
+
+  100% {
+    color: $primary;
+  }
+}
+
+@keyframes pulse-dot {
+  0% {
+    background: $primary;
+  }
+
+  50% {
+    background: #232323;
+  }
+
+  100% {
+    background: $primary;
+  }
+}
+
 
 @media(max-width:1060px) {
     .container {
