@@ -292,15 +292,16 @@ body {
 
 .navigation-cart-icon {
   background: #b79c6e;
+  transition: all 0.3s ease-in-out;
 }
 .navigation-cart-icon:hover {
   background: #806d4d;
 }
 
-.navigation > a, .navigation > form > a {
+.navigation > a, .navigation > form > a, body > div > div > nav > div.relative > div > div > a, body > div > div > nav > div.relative > button > span {
   transition: all 0.3s ease-in-out;
 }
-.navigation > a:hover, .navigation > form > a:hover {
+.navigation > a:hover, .navigation > form > a:hover, body > div > div > nav > div.relative > div > div > a:hover, body > div > div > nav > div.relative > button > span:hover {
   color: #b79c6e;
 }
 

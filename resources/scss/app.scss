@@ -20,12 +20,13 @@ body{
 
 .navigation-cart-icon {
   background: $primary;
+  transition: $smooth;
   &:hover{
     background: $primary-hover;
   }
 }
 
-.navigation > a , .navigation > form > a {
+.navigation > a , .navigation > form > a , body > div > div > nav > div.relative > div > div > a, body > div > div > nav > div.relative > button > span{
   transition: $smooth;
   &:hover{
     color: $primary;
