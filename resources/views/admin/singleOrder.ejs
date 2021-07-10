@@ -2,6 +2,30 @@
     <div class="container mx-auto md:w-1/2">
 
       <div class="mx-auto">
+        <% if (order.status === 'completed') {%>
+          <div class="flex flex-col sm:flex-row items-center justify-between mb-5">
+              <h1 class="text-xl font-bold">Cheers, This Event Is Complete.</h1>
+              <h6 class="link bg-white py-1 mt-2 sm:mt-0 rounded-full px-4 text-xs">Order Number: <%=
+                  String(order._id).substring(19,24) %></h6>
+              <input id="hiddenInput" type="hidden" value="<%= JSON.stringify(order) %>">
+          </div>
+
+          <% if (order.feedback === 'not_submitted') {%>
+          <div class="text-center mb-4 rounded shadow bg-white py-4 px-8">
+            <p class="font-bold mb-2">Feedback Not Received.</p>
+          </div>
+          <%} else {%>
+            <div class="text-center mb-4 rounded shadow bg-white py-4 px-8">
+              <p class="font-bold mb-2">Customer Feedback</p>
+              <p><%= order.feedback %></p>
+
+            </div>
+          <%} %>
+
+        <%} else {%>
+
+        <%} %>
+
           <h1 class="font-bold text-lg mb-4 choose-title">Event Details</h1>
 
           <div>

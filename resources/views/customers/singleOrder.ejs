@@ -6,30 +6,40 @@
             <% if (order.status === 'completed') {%>
               <div class="flex flex-col sm:flex-row items-center justify-between mb-5">
                   <h1 class="text-xl font-bold">Cheers, This Event Is Complete.</h1>
-                  <h6 class="link bg-white py-1 mt-2 sm:mt-0 rounded-full px-4 text-green-600 text-xs">Order Number: <%=
+                  <h6 class="link bg-white py-1 mt-2 sm:mt-0 rounded-full px-4 text-xs">Order Number: <%=
                       String(order._id).substring(19,24) %></h6>
                   <input id="hiddenInput" type="hidden" value="<%= JSON.stringify(order) %>">
               </div>
 
+              <% if (order.feedback === 'not_submitted') {%>
               <div class="text-center">
-                <form action="" method="" class="mt-3">
+                <form action="/feedback" method="POST" class="mt-3">
 
                   <h1 class="text-xl font-bold mb-3 choose-title">Submit Feedback</h1>
                   <% if (messages.error) { %>
                     <span class="block text-red-500 text-sm mb-3"><%= messages.error %></span>
                   <% }%>
+
                   <textarea name="feedback" class="border border-gray-400 p-2 w-full md:w-1/2 rounded" placeholder="How Was It?" required></textarea>
 
+                  <input name="order_id" type="hidden" value=<%=JSON.stringify(order._id)%> >
                   <div class="">
                     <button type="submit" name="button" class="w-full md:w-1/2 btn-primary px-6 py-2 rounded text-white font-bold mt-4">Send</button>
                   </div>
 
                 </form>
               </div>
+              <%} else {%>
+                <div class="text-center mb-4 rounded shadow bg-white py-4 px-8">
+                  <p class="font-bold mb-2">Your Feedback</p>
+                  <p><%= order.feedback %></p>
+                </div>
+              <%} %>
+
             <%} else {%>
               <div class="flex flex-col sm:flex-row items-center justify-between mb-12">
                   <h1 class="text-xl font-bold">Order Status</h1>
-                  <h6 class="bg-white py-1 mt-2 sm:mt-0 rounded-full px-4 text-green-600 text-xs">Order Number: <%=
+                  <h6 class="link bg-white py-1 mt-2 sm:mt-0 rounded-full px-4 text-xs">Order Number: <%=
                       String(order._id).substring(19,24) %></h6>
                   <input id="hiddenInput" type="hidden" value="<%= JSON.stringify(order) %>">
               </div>

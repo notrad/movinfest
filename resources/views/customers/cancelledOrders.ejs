@@ -1,5 +1,6 @@
 <section class="orders light-section bg-gray-100 text-gray-800">
     <div class="container mx-auto pt-4 md:pt-12">
+
       <% if(messages.success) { %>
       <div id="success-alert" class="flex items-center text-white text-sm font-bold px-4 py-3 mb-5 rounded"
           role="alert">
@@ -11,11 +12,12 @@
       </div>
       <% } %>
 
-              <h1 class="font-bold text-lg mb-4 choose-title">My Orders</h1>
+              <h1 class="font-bold text-lg mb-4 choose-title">Cancelled Orders</h1>
 
               <div class="flex flex-col md:flex-row flex-wrap">
                 <% if(orders.length) { %>
                 <% orders.forEach((order) => { %>
+                  <% if(order.status === 'completed') { %>
                     <div class="rounded shadow-md bg-white py-3 mb-3 sm:py-4 sm:px-8 md:ml-3">
                       <div class="px-4 pb-2 font-bold text-lg border-b">
                           <a class="link bg-gray-100 py-1 rounded-full px-4 text-green-600 font-bold" href="/customer/orders/<%= order._id %>"><span>Order Number: </span><%= String(order._id).substring(19,24) %></a>
@@ -30,6 +32,7 @@
                           Date & Time: <%= moment(order.datetime).format('Do MMMM YYYY @ hh:mm A') %>
                       </div>
                     </div>
+                  <%}%>
 
                 <% }) %>
                 <% } else { %>
@@ -38,6 +41,5 @@
                 </div>
                 <% } %>
               </div>
-
     </div>
 </section>

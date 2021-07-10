@@ -17,6 +17,7 @@ const orderSchema = new Schema({
     paymentType: { type: String, default: 'COD'},
     paymentStatus: { type: Boolean, default: false },
     status: { type: String, default: 'order_placed'},
+    feedback: { type: String, default: 'not_submitted'},
 }, { timestamps: true });
 
 module.exports = mongoose.model('Order', orderSchema);

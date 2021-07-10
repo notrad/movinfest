@@ -5,13 +5,13 @@ const passport = require('passport');
 function authController() {
 
   const _getRedirectUrl = (req) => {
-        return req.user.role === 'admin' ? '/admin/orders' : '/';
+        return (req.user.role === 'admin' ? '/admin/orders' : '/');
     }
 
   return {
 
     login(req, res) {
-      res.render('auth/login');
+      return res.render('auth/login');
     },
 
     postLogin(req, res, next) {
@@ -91,7 +91,7 @@ function authController() {
     logout(req, res) {
       delete req.session.cart;
       req.logout();
-      return res.redirect('login');
+      return res.redirect('/login');
     }
   };
 }

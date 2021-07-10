@@ -26,10 +26,15 @@ function initRoutes(app) {
   app.post('/remove-cart-item', cartController().removeFromCart);
 
   app.post('/orders', auth, orderController().store);
+  app.post('/feedback', auth, orderController().feedback);
   app.get('/customer/orders', auth, orderController().index);
+  app.get('/customer/orders/completed', auth, orderController().completedOrders);
+  app.get('/customer/orders/cancelled', auth, orderController().cancelledOrders);
   app.get('/customer/orders/:id', auth, orderController().show);
 
   app.get('/admin/orders', adminAuth, adminOrderController().index);
+  app.get('/admin/orders/completed', adminAuth, adminOrderController().completedOrders);
+  app.get('/admin/orders/cancelled', adminAuth, adminOrderController().cancelledOrders);
   app.get('/admin/orders/:id', adminAuth, adminOrderController().orderDetails);
   app.post('/admin/order/status', adminAuth, statusController().update);
 
