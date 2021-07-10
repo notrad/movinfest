@@ -8,7 +8,7 @@ function orderController() {
     async index(req, res) {
       try {
         const orders = await Order.find(
-          { customerId: req.user._id , status: { $ne: 'completed' }},
+          { customerId: req.user._id , status: {$nin : ["completed", "cancelled"]}},
           null,
           { sort: { 'createdAt': -1} }
         );

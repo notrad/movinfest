@@ -298,10 +298,10 @@ body {
   background: #806d4d;
 }
 
-.navigation > a, .navigation > form > a, body > div > div > nav > div.relative > div > div > a, body > div > div > nav > div.relative > button > span {
+.navigation > a, .navigation > form > a, div.relative > div > div > a, div.relative > button > span {
   transition: all 0.3s ease-in-out;
 }
-.navigation > a:hover, .navigation > form > a:hover, body > div > div > nav > div.relative > div > div > a:hover, body > div > div > nav > div.relative > button > span:hover {
+.navigation > a:hover, .navigation > form > a:hover, div.relative > div > div > a:hover, div.relative > button > span:hover {
   color: #b79c6e;
 }
 

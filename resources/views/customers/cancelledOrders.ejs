@@ -17,7 +17,6 @@
               <div class="flex flex-col md:flex-row flex-wrap">
                 <% if(orders.length) { %>
                 <% orders.forEach((order) => { %>
-                  <% if(order.status === 'completed') { %>
                     <div class="rounded shadow-md bg-white py-3 mb-3 sm:py-4 sm:px-8 md:ml-3">
                       <div class="px-4 pb-2 font-bold text-lg border-b">
                           <a class="link bg-gray-100 py-1 rounded-full px-4 text-green-600 font-bold" href="/customer/orders/<%= order._id %>"><span>Order Number: </span><%= String(order._id).substring(19,24) %></a>
@@ -32,7 +31,6 @@
                           Date & Time: <%= moment(order.datetime).format('Do MMMM YYYY @ hh:mm A') %>
                       </div>
                     </div>
-                  <%}%>
 
                 <% }) %>
                 <% } else { %>

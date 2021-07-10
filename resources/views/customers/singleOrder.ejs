@@ -36,6 +36,13 @@
                 </div>
               <%} %>
 
+            <% } else if (order.status === 'cancelled'){%>
+              <div class="flex flex-col sm:flex-row items-center justify-between mb-5">
+                  <h1 class="text-xl font-bold">Sorry, This Order Was Cancelled.</h1>
+                  <h6 class="link bg-white py-1 mt-2 sm:mt-0 rounded-full px-4 text-xs">Order Number: <%=
+                      String(order._id).substring(19,24) %></h6>
+                  <input id="hiddenInput" type="hidden" value="<%= JSON.stringify(order) %>">
+              </div>
             <%} else {%>
               <div class="flex flex-col sm:flex-row items-center justify-between mb-12">
                   <h1 class="text-xl font-bold">Order Status</h1>

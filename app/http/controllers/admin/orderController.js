@@ -5,7 +5,7 @@ const moment = require('moment');
 function orderController() {
     return {
         index(req, res) {
-           Order.find({ status: { $ne: 'completed' } }, null, { sort: { 'createdAt': -1 }}).populate('customerId', '-password').exec((err, orders) => {
+           Order.find({ status: {$nin : ["completed", "cancelled"]} }, null, { sort: { 'createdAt': -1 }}).populate('customerId', '-password').exec((err, orders) => {
              if(req.xhr) {
                res.header('Cache-Control', 'no-store');
                return res.json(orders);

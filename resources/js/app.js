@@ -70,15 +70,13 @@ function removeCartItem(item, btn) {
       }
 
     }
-
-
   })
   .catch( err => {
     new Noty({
       type: 'error',
       timeout: 1000,
       progressBar: false,
-      text: 'Whoops! Item Could Not Be Deleted.',
+      text: 'Whoops! Item Could Not Be Removed.',
       layout: 'topRight'
     }).show();
   })
@@ -165,7 +163,7 @@ socket.on('orderUpdated', (data) => {
     new Noty({
         type: 'success',
         timeout: 1000,
-        text: 'Order updated',
+        text: 'Order Status Updated',
         progressBar: false,
     }).show();
 });

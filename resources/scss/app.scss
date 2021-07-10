@@ -26,7 +26,7 @@ body{
   }
 }
 
-.navigation > a , .navigation > form > a , body > div > div > nav > div.relative > div > div > a, body > div > div > nav > div.relative > button > span{
+.navigation > a , .navigation > form > a , div.relative > div > div > a, div.relative > button > span {
   transition: $smooth;
   &:hover{
     color: $primary;
