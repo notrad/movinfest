@@ -8,7 +8,7 @@ function init(passport) {
     const user = await User.findOne({ email: email });
 
     if (!user) {
-      return done(null, false, { message: 'No User Exists With This Email.'});
+      return done(null, false, { message: 'No User Exists With This E-mail address.'});
     }
 
     bcrypt.compare(password, user.password)
@@ -16,7 +16,7 @@ function init(passport) {
       if (match) {
         return done(null, user, { message: 'Logged in Successfully'});
       } else {
-        return done(null, false, { message: 'Wrong User-name or Password'});
+        return done(null, false, { message: 'Wrong E-mail adress or Password'});
       }
     })
     .catch(err => {

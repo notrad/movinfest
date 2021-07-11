@@ -2020,6 +2020,12 @@ order = JSON.parse(order);
 var time = document.createElement('small');
 
 function updateStatus(order) {
+  if (order && order.status === 'cancelled') {
+    if (document.querySelector('#status-list')) {
+      document.querySelector('#status-list').innerHTML = "\n                <div class=\"flex flex-col sm:flex-row items-center justify-between mb-5\">\n                    <h1 class=\"text-xl font-bold\">Sorry, This Order Was Cancelled By The Caterer. \uD83D\uDE14</h1>\n                </div>";
+    }
+  }
+
   statuses.forEach(function (status) {
     status.classList.remove('step-completed');
     status.classList.remove('current');

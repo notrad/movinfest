@@ -1,7 +1,7 @@
 <section class="status text-gray-800">
     <div class="container mx-auto">
 
-        <div class="status-box w-full lg:w-2/3 mx-auto ">
+        <div class="status-box w-full lg:w-2/3 mx-auto">
 
             <% if (order.status === 'completed') {%>
               <div class="flex flex-col sm:flex-row items-center justify-between mb-5">
@@ -51,7 +51,7 @@
                   <input id="hiddenInput" type="hidden" value="<%= JSON.stringify(order) %>">
               </div>
 
-              <ul>
+              <ul id="status-list">
                   <li class="status_line text-sm md:text-xl pb-16" data-status="order_placed"><span>Order Placed</span>
                   </li>
                   <li class="status_line text-sm md:text-xl pb-16" data-status="confirmed"><span>Order Confirmation</span>
