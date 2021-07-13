@@ -1,4 +1,4 @@
-<section class="hero py-5 sm:py-16 text-gray-800">
+<section class="hero py-5 sm:py-16 md:py-10 text-gray-800">
 
     <div class="container sm:mx-auto flex flex-col sm:flex-row items-center justify-between">
         <div class="w-3/4 sm:w-1/2">
@@ -6,7 +6,7 @@
             <h6 class="sm:text-xl md:text-mb-83xl"><em>See for yourself.</em></h6>
             <a class="inline-block px-6 py-2 rounded text-white font-bold mt-4 btn-primary" href="#menu-begin">Order Now</a>
         </div>
-        <div class="mt-4 sm:mt-0 w-full sm:w-1/2">
+        <div class="mt-4 sm:mt-0 w-full sm:w-1/2 md:w-2/5">
             <img src="https://i.pinimg.com/originals/d0/90/02/d09002b6a1bcb269387fe31cecb7c8da.png" alt="chef-image">
         </div>
     </div>
@@ -73,7 +73,7 @@
 
         <% items.forEach( item => { %>
           <% if(item.category === 'non-veg') {%>
-        <div class="w-full md:w-64 rounded-xl shadow-md bg-white-100 py-6">
+        <div class="w-full md:w-64 rounded shadow-md bg-white-100 py-6">
             <img class="h-40 mb-4 mx-auto rounded-full" src="/img/<%= item.image %>" alt="">
             <div class="text-center">
                 <h2 class="mb-4 text-lg"><%= item.name %></h2>
@@ -99,7 +99,7 @@
 
         <% items.forEach( item => { %>
           <% if(item.category === 'rice & roti\'s (non-veg)' || item.category === 'rice & roti\'s (veg)' ) {%>
-        <div class="w-full md:w-64 rounded-xl shadow-md bg-white-100 py-6">
+        <div class="w-full md:w-64 rounded shadow-md bg-white-100 py-6">
             <img class="h-40 mb-4 mx-auto rounded-full" src="/img/<%= item.image %>" alt="">
             <div class="text-center">
                 <h2 class="mb-4 text-lg"><%= item.name %></h2>
@@ -131,7 +131,7 @@
 
         <% items.forEach( item => { %>
           <% if(item.category === 'salad') {%>
-        <div class="w-full md:w-64 rounded-xl shadow-md bg-white-100 py-6">
+        <div class="w-full md:w-64 rounded shadow-md bg-white-100 py-6">
             <img class="h-40 mb-4 mx-auto rounded-full" src="/img/<%= item.image %>" alt="">
             <div class="text-center">
                 <h2 class="mb-4 text-lg"><%= item.name %></h2>
@@ -157,7 +157,7 @@
 
         <% items.forEach( item => { %>
           <% if(item.category === 'dessert') {%>
-        <div class="w-full md:w-64 rounded-xl shadow-md bg-white-100 py-6">
+        <div class="w-full md:w-64 rounded shadow-md bg-white-100 py-6">
             <img class="h-40 mb-4 mx-auto rounded-full" src="/img/<%= item.image %>" alt="">
             <div class="text-center">
                 <h2 class="mb-4 text-lg"><%= item.name %></h2>
