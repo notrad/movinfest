@@ -13,7 +13,7 @@
 
       <% for(let item of Object.values(session.cart.items)) {%>
 
-      <div class="transition duration-500 ease-in flex flex-col sm:flex-row items-center my-4 rounded-lg shadow-md bg-white py-4 px-8">
+      <div class="flex flex-col sm:flex-row items-center my-4 rounded-lg shadow-md bg-white py-4 px-8">
         <img class="w-24 rounded-full" src="/img/<%= item.item.image %>" alt="item-image">
         <div class="flex-1 text-center mt-3 md:ml-4 md:text-left">
           <h1 class="font-bold text-lg md:text-md"><%= item.item.name %></h1>
@@ -30,13 +30,13 @@
             bg-blue-500
           <% } %>"><%= item.item.category %></span>
         </div>
-        <span class="flex-1 my-2 mt-7 md:mt-0 md:my-0">
+        <div class="flex-1 my-2 mt-7 md:mt-0 md:my-0">
           <button data-item="<%= JSON.stringify(item.item) %>" class="remove-from-cart btn-primary text-sm sm:text-md px-3 py-1 sm:ml-10 md:ml-0 rounded-full text-white font-bold">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
           </button>
-        </span>
+        </div>
         <span class="font-bold text-lg">₹<%= item.item.price %></span>
       </div>
 
