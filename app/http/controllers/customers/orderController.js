@@ -1,6 +1,8 @@
 const Order = require('../../../models/order');
 const moment = require('moment');
 const { ObjectId } = require('mongodb');
+require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
 function orderController() {
   return {
@@ -20,19 +22,17 @@ function orderController() {
     },
 
     store(req, res) {
-      const { phone, address, guests, eventtype, datetime, customization } = req.body;
+      const { phone, address, guests, eventtype, datetime, customization, stripeToken, paymentType } = req.body;
 
     // TODO: input sanitization
 
       if (!phone || !address || !guests || !eventtype || !datetime ) {
-        req.flash('error', 'All Fields Are Required');
-
-        return res.redirect('/cart');
+        return res.status(422).json({message: 'All Fields Are Required'});
       }
 
       if ( datetime <= (moment().format('YYYY-MM-DDTHH:MM')) ) {
-        req.flash('error', 'Invalid Date');
-        return res.redirect('/cart');
+
+        return res.status(422).json({message: 'Invalid Date.'});
       }
 
       const order = new Order({
@@ -49,20 +49,44 @@ function orderController() {
       order.save()
       .then(result => {
 
-        Order.populate(result, { path: 'customerId' }, (err, replacedOrdersult) =>{
-          req.flash('success','Order Placed Successfully.');
-          delete req.session.cart;
-
+        Order.populate(result, { path: 'customerId' }, (err, placedOrder) => {
           const eventEmitter = req.app.get('eventEmitter');
-          eventEmitter.emit('orderPlaced', result);
 
-          return res.redirect('/customer/orders');
-        });
+        if(paymentType === 'card') {
+            stripe.charges.create({
+                amount: req.session.cart.totalPrice * guests * 100,
+                source: stripeToken,
+                currency: 'inr',
+                description: `Order Number: ${placedOrder._id}`
+            }).then(() => {
+                placedOrder.paymentStatus = true;
+                placedOrder.paymentType = paymentType;
+                placedOrder.save().then((ord) => {
+
+                eventEmitter.emit('orderPlaced', ord);
+                delete req.session.cart;
+                return res.json({ message : 'Payment successful, Order placed successfully' });
+                }).catch((err) => {
+                    console.log(err);
+                });
+
+            }).catch((err) => {
+                delete req.session.cart;
+                console.log(err);
+                eventEmitter.emit('orderPlaced', placedOrder);
+                return res.json({ message : 'Order Placed but payment failed, You can pay at delivery time' });
+            });
+          } else {
+              delete req.session.cart;
+              eventEmitter.emit('orderPlaced', placedOrder);
+              return res.json({ message : 'Order placed succesfully'});
+            }
+
+          });
 
         })
       .catch(err => {
-        req.flash('error', 'Something Went Wrong');
-        return res.redirect('/cart');
+        return res.status(500).json({ message : 'Something went wrong, Order Could Not be Placed.'});
       });
     },
 

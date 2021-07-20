@@ -60,7 +60,7 @@ export function initAdmin(socket) {
                                   Completed
                               </option>
                               <option value="cancelled" ${ order.status === 'cancelled' ? 'selected' : '' }>
-                                  Cancelled
+                                  Cancel
                               </option>
                           </select>
                       </form>
@@ -78,7 +78,7 @@ export function initAdmin(socket) {
                   Received On: ${ moment(order.createdAt).format('Do MMMM YYYY, hh:mm A') }
               </div>
               <div class="px-4 mb-1 font-bold">
-                  Payment Status: ${ order.paymentStatus ? 'paid' : 'Not Paid (Cash On Delivery)' }
+                  Payment Status: ${ order.paymentStatus ? 'Paid (with Card)' : 'Not Paid (Cash On Delivery)' }
               </div>
             </div>
                 `
