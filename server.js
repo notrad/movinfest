@@ -13,6 +13,7 @@ const Database = require('./app/config/databaseConnection');
 
 
 //configuration
+require('dotenv').config();
 const app = express();
 new Database();
 const PORT = process.env.PORT || 3000;
