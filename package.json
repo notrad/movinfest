@@ -9,7 +9,8 @@
     "serve": "node server",
     "develop": "nodemon server",
     "watch": "mix watch",
-    "production": "mix --production"
+    "production": "mix --production",
+    "postinstall": "mix --production"
   },
   "author": "notrad",
   "license": "MIT",

@@ -19,7 +19,7 @@ function cartController() {
       }
 
       let cart = req.session.cart;
-      //if items does not exit in cart, it is added
+      //if items does not exist in cart, it is added
       if (!cart.items[req.body._id]) {
         cart.items[req.body._id] = {
           item: req.body

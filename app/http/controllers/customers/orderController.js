@@ -24,7 +24,7 @@ function orderController() {
     store(req, res) {
       const { phone, address, guests, eventtype, datetime, customization, stripeToken, paymentType } = req.body;
 
-    // TODO: input sanitization
+      // TODO: input sanitization
 
       if (!phone || !address || !guests || !eventtype || !datetime ) {
         return res.status(422).json({message: 'All Fields Are Required'});

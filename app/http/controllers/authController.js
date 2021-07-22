@@ -5,12 +5,13 @@ const passport = require('passport');
 function authController() {
 
   const _getRedirectUrl = (req) => {
-        return (req.user.role === 'admin' ? '/admin/orders' : '/');
+        return (req.user.role === 'admin' ? '/admin/orders' : '/cart');
     }
 
   return {
 
     login(req, res) {
+      console.log(req.path);
       return res.render('auth/login');
     },
 
@@ -40,8 +41,6 @@ function authController() {
 
                     res.header('Cache-Control', 'no-store');
                     return res.redirect(_getRedirectUrl(req));
-                    // return res.redirect('/');
-                    // use render function instead if nav bar is not getting updated, solved with cache-control
                 });
 
             })(req, res, next)
