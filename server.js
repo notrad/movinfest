@@ -33,7 +33,7 @@ app.use(session({
   }),
   cookie: {
     maxAge: 1000*60*60*24, // not a good practice
-    secure: true //only works over https, but maxAge bypasses this
+    // secure: true //only works over https
     } // session is saved for 24 hours on the db
 }));
 
@@ -49,9 +49,9 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use((req, res, next) => {
-  //session & user details of the current user are sent to its local frontend through response
-  res.locals.session = req.session;
-  res.locals.user = req.user;
+  //session & user details of the current user are sent to its local frontend through response, used to set the user_id by passport
+  res.locals.session = req.session; // created by express session
+  res.locals.user = req.user; // created by passport middleware
   next();
 });
 app.set('view engine', 'ejs');
